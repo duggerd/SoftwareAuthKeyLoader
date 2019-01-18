@@ -1,0 +1,54 @@
+; Generic Project 25 Radio Serial Modem Setup File
+; Copyright 2019 Daniel Dugger
+
+; Changelog:
+; 1.0.0.0 (2019-01-17) - Initial Release
+
+[Version]
+Signature="$WINDOWS NT$"
+Class=Modem
+ClassGUID={4D36E96D-E325-11CE-BFC1-08002BE10318}
+Provider=%Project25%
+DriverVer=01/17/2019,1.0.0.0
+
+[Manufacturer]
+%Project25% = Project25,NTx86,NTamd64
+
+[Project25.NTx86]
+%Modem1% = Modem1, PNPC031
+
+[Project25.NTamd64]
+%Modem1% = Modem1, PNPC031
+
+[Modem1]
+AddReg=All, MfgAddReg, Modem1.AddReg, SERIAL
+
+[All]
+HKR,,FriendlyDriver,,Unimodem.vxd
+HKR,,DevLoader,,*VCOMM
+HKR,,PortSubClass,1,02
+HKR,,ConfigDialog,,modemui.dll
+HKR,,EnumPropPages,,"modemui.dll,EnumPropPages"
+
+[MfgAddReg]
+HKR, Init, 1,, "+++"
+HKR, Init, 2,, "NoResponse"
+HKR, Monitor, 1,, "None"
+HKR, Answer, 1,, ""
+HKR, Answer, 2,, "NoResponse"
+HKR, Settings, DialPrefix,, "CLIENT"
+HKR, Responses, "CLIENTSERVER", 1, 02, 00, 00, 00, 00, 00, 00,00,00,00
+
+[Modem1.AddReg]
+HKR,, Properties, 1, 00,00,00,00, 00,00,00,00, 00,00,00,00, 00,00,00,00, 00,00,00,00, 00,00,00,00, 00,C2,01,00, 00,C2,01,00
+HKR,, DCB, 1, 1C,00,00,00, 80,25,00,00, 15,20,00,00, 00,00, 0a,00, 0a,00, 08, 00, 00, 11, 13, 00, 00, 00 ; 9600-8-N-1
+;HKR,, DCB, 1, 1C,00,00,00, 00,4B,00,00, 15,20,00,00, 00,00, 0a,00, 0a,00, 08, 00, 00, 11, 13, 00, 00, 00 ; 19200-8-N-1
+;HKR,, DCB, 1, 1C,00,00,00, 00,E1,00,00, 15,20,00,00, 00,00, 0a,00, 0a,00, 08, 00, 00, 11, 13, 00, 00, 00 ; 57600-8-N-1
+;HKR,, DCB, 1, 1C,00,00,00, 00,C2,01,00, 15,20,00,00, 00,00, 0a,00, 0a,00, 08, 00, 00, 11, 13, 00, 00, 00 ; 115200-8-N-1
+
+[SERIAL]
+HKR,, DeviceType, 1, 00
+
+[Strings]
+Project25 = "Project 25"
+Modem1 = "P25 Radio Serial Modem"
